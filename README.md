@@ -127,6 +127,9 @@ public class Down {
     @GetMapping("/a.htm")
     public void cooperation(HttpServletRequest request, HttpServletResponse response) {
         ServletOutputStream out = response.getOutputStream();
+         response.setContentType("multipart/form-data");
+        response.setCharacterEncoding("utf-8");
+        response.setHeader("Content-disposition", "attachment;filename="+fileName+".xlsx");
         ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX, true);
         String fileName = new String(("UserInfo " + new SimpleDateFormat("yyyy-MM-dd").format(new Date()))
                 .getBytes(), "UTF-8");
@@ -134,9 +137,7 @@ public class Down {
         sheet1.setSheetName("第一个sheet");
         writer.write0(getListString(), sheet1);
         writer.finish();
-        response.setContentType("multipart/form-data");
-        response.setCharacterEncoding("utf-8");
-        response.setHeader("Content-disposition", "attachment;filename="+fileName+".xlsx");
+      
         out.flush();
         }
     }
@@ -146,6 +147,4 @@ public class Down {
 有问题阿里同事可以通过钉钉找到我，阿里外同学可以通过git留言。其他技术非技术相关的也欢迎一起探讨。
 ### 招聘&交流
 阿里巴巴新零售事业部--诚招JAVA资深开发、技术专家。有意向可以微信联系，简历可以发我邮箱jipengfei.jpf@alibaba-inc.com
-或者加微信：18042000709
-
-<img src="https://github.com/alibaba/easyexcel/blob/master/img/WechatIMG8.png" width="30%" height="30%" />
+或者加QQ群： 662022184
